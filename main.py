@@ -24,9 +24,10 @@ async def on_message(message):
         cc = await client.wait_for("message", check=check)
 
         meigen = cc.content
-        sql = 'insert into meigen (body) values (?)'
-        namelist = (meigen)
-        c.execute(sql, namelist)
+        meigen = str(meigen)
+        sql = 'insert into meigen (body) values ("' + meigen + '")'
+        print(sql)
+        c.execute(sql)
         conn.commit()
 
 
